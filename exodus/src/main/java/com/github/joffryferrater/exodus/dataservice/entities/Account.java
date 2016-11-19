@@ -1,8 +1,15 @@
 package com.github.joffryferrater.exodus.dataservice.entities;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 
@@ -13,10 +20,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Account {
 
 	@Id
+	@JsonProperty("Id")
 	private String id;
+	@NotNull(message = "Full name must not be null")
+	@NotBlank(message = "Full name must not be empty")
+	@JsonProperty("Full Name")
 	private String fullName;
+	@NotNull(message = "Username must not be null")
+	@NotBlank(message = "Username must not be empty")
+	@JsonProperty("Username")
 	private String username;
+	@NotNull(message = "Username must not be null")
+	@NotBlank(message = "Username must not be empty")
+	@Size(min=8)
+	@JsonProperty("Password")
 	private String password;
+	@Email
+	@JsonProperty("Email")
 	private String email;
 	
 	public Account() {

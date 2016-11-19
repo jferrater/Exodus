@@ -13,10 +13,21 @@
                 </servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Registration</display-name>
+		<servlet-name>Registration</servlet-name>
+		<servlet-class>com.github.joffryferrater.exodus.controllers.registration.Registration</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/Registration</url-pattern>
 	</servlet-mapping>
 
 	<context-param>

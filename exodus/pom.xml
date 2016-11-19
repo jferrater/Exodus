@@ -11,11 +11,13 @@
   
    
   	<properties>
-		<jdk.version>1.7</jdk.version>
-		<spring.version>4.3.3.RELEASE</spring.version>
+   		<java.version>1.8</java.version>
+   		<spring.version>4.3.3.RELEASE</spring.version>
 		<jstl.version>1.2</jstl.version>
 		<logback.version>1.0.13</logback.version>
 		<jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <tomcat.version>8.5.6</tomcat.version>
 	</properties>
 	
 	 <parent>
@@ -26,6 +28,13 @@
 	
   <dependencies>
 
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
 	   <dependency>
     	    <groupId>org.springframework.data</groupId>
         	<artifactId>spring-data-mongodb</artifactId>
@@ -35,12 +44,6 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.9.10</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jmockit</groupId>
-			<artifactId>jmockit</artifactId>
-			<version>1.13</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -83,11 +86,6 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 
-   		<dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot</artifactId>
-    	</dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -98,6 +96,11 @@
             <scope>test</scope>
         </dependency>
         
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <scope>test</scope>
+        </dependency>
         
 		<!-- jstl -->
 		<dependency>
@@ -106,7 +109,36 @@
 			<version>${jstl.version}</version>
 		</dependency>
   </dependencies>
+  
   <build>
     <finalName>exodus</finalName>
+    <pluginManagement>
+            <plugins>
+            	<plugin>
+                	<groupId>org.springframework.boot</groupId>
+                	<artifactId>spring-boot-maven-plugin</artifactId>
+            	</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <configuration>
+                        <path>/</path>
+                        <contextReloadable>true</contextReloadable>
+                    </configuration>
+                </plugin>
+            </plugins>
+     </pluginManagement>
   </build>
 </project>
